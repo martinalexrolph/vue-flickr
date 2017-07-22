@@ -4,8 +4,14 @@
       <img class="photo-card__photo" v-bind:src="photo.media.m">
     </div>
     <div class="photo-card__text-container">
-      <h3 class="photo-card__header"><a v-bind:href="photo.link" class="photo-card__title">{{ getTitle() }}</a> by <a v-bind:href="getAuthorLink()">{{ getAuthor() }}</a></h3>
-      <p><b>Description:</b> {{ getDescription() }}</p>
+      <a class="title" v-bind:href="photo.link">
+        {{ getTitle() }}
+      </a>
+      <p class="author">
+        by <a class="author-link" v-bind:href="getAuthorLink()">{{ getAuthor() }}</a>
+      </p>
+      <p v-if="getDescription()"><b>Description:</b> {{ getDescription() }}</p>
+      <p v-if="!getDescription()">No description</p>
       <p v-if="getTags()"><b>Tags:</b> {{ getTags() }}</p>
     </div>
   </div>
@@ -57,7 +63,9 @@ export default {
       // the description field is HTML, and includes an <img> tag of the photo itself, so extract the actual text using a virtual DOM element
       var span = document.createElement('span')
       span.innerHTML = this.photo.description
-      return span.textContent || span.innerText
+      const contents = span.textContent || span.innerText
+      // ignore the 'username posted a photo:' section
+      return $.trim(contents.split('posted a photo:')[1])
     },
     getTags: function () {
       const tagsArray = this.photo.tags.split(' ')
@@ -74,43 +82,73 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .photo-card {
-  width: 250px;
-  height: 300px;
+  width: 300px;
+  height: 350px;
   max-width: 100%;
   flex-grow: 1;
   margin: 10px;
   overflow: scroll;
-  box-shadow: 1px 1px 5px #ccc;
+  box-shadow: 1px 1px 5px #bbb;
   transition: box-shadow 0.5s ease-in-out;
   border-radius: 3px;
+  background: #f1f1f1;
 }
 
 .photo-card:hover {
-  box-shadow: 1px 1px 8px 2px #bbb;
+  box-shadow: 1px 1px 8px 2px #aaa;
 }
 
 .photo-card__photo-container {
   width: 100%;
-  height: 180px;
+  height: 230px;
   display: flex;  align-items: center;
   justify-content: center;
+  border-bottom: 1px solid #ddd;
+  background: white;
 }
 
 .photo-card__text-container {
   padding: 10px 10px 0 10px;
   text-align: left;
   font-size: 13px;
-  height: 110px;
+  height: 109px;
   overflow: scroll;
 }
 
 .photo-card__photo {
   max-width: 90%;
-  max-height: 150px;
+  max-height: 200px;
 }
 
-.photo-card__header {
-  font-size: 13px;
+.title {
+  font-weight: 900;
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 0;
   margin-top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.author {
+  margin-top: 5px;
+  font-size: 15px;
+}
+
+.author-link {
+  font-weight: 900;
+  color: #333;
+  text-decoration: none;
+}
+
+.author-link:hover {
+  text-decoration: underline;
 }
 </style>
