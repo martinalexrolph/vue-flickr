@@ -1,10 +1,9 @@
 <template>
   <div class="photo-feed">
-    <h1>{{ msg }}</h1>
-
     <photo-card
-      v-for="photo in photos"
-      v-bind:photo="photo">
+      v-for="(photo, index) in photos"
+      v-bind:photo="photo"
+      v-bind:key="index">
     </photo-card>
   </div>
 </template>
@@ -39,21 +38,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+
+.photo-feed {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
