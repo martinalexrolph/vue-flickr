@@ -26,6 +26,7 @@ export default {
   ],
   methods: {
     getTitle: function () {
+      // some photos have very long titles and some don't have any so trim and give a fallback
       const trimmed = $.trim(this.photo.title)
       if (!trimmed) {
         return 'Untitled'
@@ -53,6 +54,7 @@ export default {
       }
     },
     getDescription: function () {
+      // the description field is HTML, and includes an <img> tag of the photo itself, so extract the actual text using a virtual DOM element
       var span = document.createElement('span')
       span.innerHTML = this.photo.description
       return span.textContent || span.innerText
@@ -78,23 +80,27 @@ export default {
   flex-grow: 1;
   margin: 10px;
   overflow: scroll;
-  box-shadow: 1px 1px 5px #bbb;
+  box-shadow: 1px 1px 5px #ccc;
+  transition: box-shadow 0.5s ease-in-out;
+  border-radius: 3px;
+}
+
+.photo-card:hover {
+  box-shadow: 1px 1px 8px 2px #bbb;
 }
 
 .photo-card__photo-container {
   width: 100%;
   height: 180px;
-  display: flex;
-  //background: #444;
-  align-items: center;
+  display: flex;  align-items: center;
   justify-content: center;
 }
 
 .photo-card__text-container {
-  padding: 10px;
+  padding: 10px 10px 0 10px;
   text-align: left;
   font-size: 13px;
-  height: 100px;
+  height: 110px;
   overflow: scroll;
 }
 

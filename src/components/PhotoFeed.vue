@@ -10,7 +10,6 @@
 
 <script>
 import $ from 'jquery'
-
 import PhotoCard from './PhotoCard'
 
 export default {
@@ -18,18 +17,14 @@ export default {
   components: {
     PhotoCard
   },
-  data () {
-    return {
-      msg: 'Flickr Photo Feed',
-      photos: []
-    }
-  },
+  data: () => ({
+    photos: []
+  }),
   created () {
     $.ajax({
       url: 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=?',
       dataType: 'json'
     }).then((data) => {
-      console.log(data)
       this.photos = data.items
     })
   }
