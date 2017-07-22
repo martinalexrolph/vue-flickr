@@ -3,8 +3,11 @@
     <div class="photo-card__photo-container">
       <img class="photo-card__photo" v-bind:src="photo.media.m">
     </div>
-    <h3 class="photo-card__header"><a v-bind:href="photo.link" class="photo-card__title">{{ getTitle() }}</a> by {{ getAuthor() }}</h3>
-    <div>{{ getDescription() }}</div>
+    <div class="photo-card__text-container">
+      <h3 class="photo-card__header"><a v-bind:href="photo.link" class="photo-card__title">{{ getTitle() }}</a> by <a v-bind:href="getAuthorLink()">{{ getAuthor() }}</a></h3>
+      <p><b>Description:</b> {{ getDescription() }}</p>
+      <p v-if="getTags()"><b>Tags:</b> {{ getTags() }}</p>
+    </div>
   </div>
 </template>
 
@@ -52,11 +55,17 @@ export default {
     getDescription: function () {
       var span = document.createElement('span')
       span.innerHTML = this.photo.description
-      console.log(this.photo.description)
       return span.textContent || span.innerText
+    },
+    getTags: function () {
+      const tagsArray = this.photo.tags.split(' ')
+      return tagsArray.join(', ')
+    },
+    getAuthorLink: function () {
+      // there's no author link included in the object so get it from the photo link
+      return this.photo.link.split('/').slice(0, -2).join('/')
     }
   }
-
 }
 </script>
 
@@ -67,25 +76,35 @@ export default {
   height: 300px;
   max-width: 100%;
   flex-grow: 1;
-  margin: 5px;
+  margin: 10px;
+  overflow: scroll;
+  box-shadow: 1px 1px 5px #bbb;
+}
+
+.photo-card__photo-container {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  //background: #444;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-card__text-container {
   padding: 10px;
-  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 13px;
+  height: 100px;
   overflow: scroll;
 }
 
-.photo-container {
-  width: 100%;
-  height: 150px;
-  display: flex;
-  background: grey;
-}
-
 .photo-card__photo {
-  max-width: 100%;
+  max-width: 90%;
   max-height: 150px;
 }
 
 .photo-card__header {
   font-size: 13px;
+  margin-top: 0;
 }
 </style>
