@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <photo-feed></photo-feed>
+    <feed></feed>
   </div>
 </template>
 
 <script>
-import PhotoFeed from './components/PhotoFeed'
+import Feed from './components/Feed'
 
 export default {
   name: 'app',
   components: {
-    PhotoFeed
+    Feed
   }
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
-  <div class="photo-card">
-    <div class="photo-card__photo-container">
-      <img class="photo-card__photo" v-bind:src="photo.media.m">
+  <div class="card">
+    <div class="photo-container" v-on:click="modalOpen = true">
+      <img class="photo" v-bind:src="photo.media.m">
     </div>
-    <div class="photo-card__text-container">
+    <div class="text-container">
       <a class="title" v-bind:href="photo.link">
         {{ getTitle() }}
       </a>
@@ -13,18 +13,23 @@
       <p v-if="getDescription()"><b>Description:</b> {{ getDescription() }}</p>
       <p v-if="getTags()"><b>Tags:</b> {{ getTags() }}</p>
     </div>
+    <modal v-if="modalOpen" v-on:close="modalOpen = false" v-bind:photo="photo"></modal>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
+import Modal from './Modal'
 
 export default {
-  name: 'photo-feed',
+  name: 'card',
   data () {
     return {
-      msg: "It's a photo!"
+      modalOpen: false
     }
+  },
+  components: {
+    Modal
   },
   props: [
     'photo'
@@ -80,33 +85,33 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.photo-card {
+.card {
   width: 300px;
-  height: 350px;
+  height: 380px;
   max-width: 100%;
   flex-grow: 1;
   margin: 10px;
   overflow: scroll;
   box-shadow: 1px 1px 5px #bbb;
-  transition: box-shadow 0.5s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out;
   border-radius: 3px;
   background: #f1f1f1;
 }
 
-.photo-card:hover {
+.card:hover {
   box-shadow: 1px 1px 8px 2px #aaa;
 }
 
-.photo-card__photo-container {
+.photo-container {
   width: 100%;
-  height: 230px;
+  height: 260px;
   display: flex;  align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
   background: white;
 }
 
-.photo-card__text-container {
+.text-container {
   padding: 10px 10px 0 10px;
   text-align: left;
   font-size: 13px;
@@ -114,9 +119,14 @@ export default {
   overflow: scroll;
 }
 
-.photo-card__photo {
+.photo {
   max-width: 90%;
   max-height: 200px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.photo-container:hover .photo {
+  transform: scale(1.07);
 }
 
 .title {

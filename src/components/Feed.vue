@@ -1,5 +1,5 @@
 <template>
-  <div class="photo-feed">
+  <div class="feed">
     <div class="header">
       <h1 class="title">Flickr's latest photos</h1>
       <div class="search-box">
@@ -15,23 +15,23 @@
       </div>
     </div>
     <div class="grid"> 
-      <photo-card
+      <card
         v-for="(photo, index) in photos"
         v-bind:photo="photo"
         v-bind:key="index">
-      </photo-card>
+      </card>
     </div>
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
-import PhotoCard from './PhotoCard'
+import Card from './Card'
 
 export default {
-  name: 'photo-feed',
+  name: 'feed',
   components: {
-    PhotoCard
+    Card
   },
   data: () => ({
     photos: [],
@@ -62,7 +62,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.photo-feed {
+.feed {
   text-align: left;
 }
 
