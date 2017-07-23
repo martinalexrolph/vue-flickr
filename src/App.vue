@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Flickr's latest photos</h1>
     <photo-feed></photo-feed>
   </div>
 </template>

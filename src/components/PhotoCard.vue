@@ -11,7 +11,6 @@
         by <a class="author-link" v-bind:href="getAuthorLink()">{{ getAuthor() }}</a>
       </p>
       <p v-if="getDescription()"><b>Description:</b> {{ getDescription() }}</p>
-      <p v-if="!getDescription()">No description</p>
       <p v-if="getTags()"><b>Tags:</b> {{ getTags() }}</p>
     </div>
   </div>
