@@ -92,14 +92,10 @@ export default {
   flex-grow: 1;
   margin: 10px;
   overflow: scroll;
-  box-shadow: 1px 1px 5px #bbb;
+  box-shadow: 1px 1px 6px #bbb;
   transition: box-shadow 0.2s ease-in-out;
   border-radius: 3px;
   background: #f1f1f1;
-}
-
-.card:hover {
-  box-shadow: 1px 1px 8px 2px #aaa;
 }
 
 .photo-container {
