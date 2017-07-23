@@ -1,6 +1,6 @@
 # vue-flickr
 
-> Learning Vue.js by building a small Flickr viewing app. Can be viewed at [vue-flickr.herokuapp.com](http://vue-flickr.herokuapp.com). Shows you the public Flickr feed, allowing you to filter by tags and view the images either in a modal or on Flickr's site.
+> A small project to learn Vue.js by building a Flickr feed viewer. Live at [vue-flickr.herokuapp.com](http://vue-flickr.herokuapp.com). Shows you the public Flickr feed, allowing you to filter by tags and view the images either in a modal or on Flickr's site.
 
 ## Build Setup
 
